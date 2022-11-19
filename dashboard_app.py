@@ -41,3 +41,28 @@ gender = st.sidebar.multiselect(
 df_selection = df.query(
       "City == @city & Customer_type == @customer_type & Gender == @gender"
 )
+
+# Main Page
+st.title(":bar_chart: Sales Dashboard")
+st.markdown("##")
+
+total_sales = int(df_selection["Total"].sum())
+average_rating = round(df_selection["Rating"].mean(),1)
+star_rating = ":star:" * int(round(average_rating,0))
+average_transaction = round(df_selection["Total"].mean(), 2)
+
+left_col, mid_col, right_col = st.columns(3)
+
+with left_col:
+      st.subheader("Total Sales")
+      st.subheader(f"US $ {total_sales:,}")
+
+with mid_col:
+      st.subheader("Rating")
+      st.subheader(f"{average_rating} {star_rating}")
+
+with right_col:
+      st.subheader("Average Transaction")
+      st.subheader(f"US $ {average_transaction}")
+
+st.markdown("---")
